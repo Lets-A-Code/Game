@@ -1,0 +1,32 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "shell",
+			"label": "Build",
+			"command": "C:\\src\\mingw64\\bin\\g++.exe",
+			"args": [
+				"-g",
+				"src\\*.cpp",
+				"-o",
+				"bin\\game.exe",
+				"-Iinclude",
+				"-Llib",
+				"-mwindows",
+				"-lsfml-graphics",
+				"-lsfml-window",
+				"-lsfml-system"
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
+		}
+	]
+}
