@@ -28,7 +28,7 @@ int main() {
         std::cout << "up: " << up << " down: " << down << " left: " << left << " right: " << right << std::endl;
 
         window.clear(sf::Color(50, 50, 50));
-        window.setFramerateLimit(60);
+        window.setFramerateLimit(30);
         window.display();
     }
 
