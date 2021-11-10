@@ -12,7 +12,6 @@
 				"bin\\game.exe",
 				"-Iinclude",
 				"-Llib",
-				"-mwindows",
 				"-lsfml-graphics",
 				"-lsfml-window",
 				"-lsfml-system"
