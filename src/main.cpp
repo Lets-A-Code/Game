@@ -22,7 +22,7 @@ class playerClass {
         playerClass() {
             PlayerFaceRight = true;
 
-            playerSpeed = 2.5;
+            playerSpeed = 5;
 
             xPos = 0;
             yPos = 0;
@@ -68,6 +68,11 @@ int main() {
 
     bool playerUp, playerDown, playerLeft, playerRight;
 
+    Texture playerTexture;
+    playerTexture.loadFromFile("assets/images/player.png");
+    Sprite playerSprite(playerTexture);
+    playerSprite.setScale(2.5, 2.5);
+
     playerClass playerObj;
 
     while (window.isOpen()) {
@@ -93,6 +98,10 @@ int main() {
 
         window.clear(Color(50, 50, 50));
         window.setFramerateLimit(30);
+
+        window.draw(playerSprite);
+        playerSprite.setPosition(Vector2f(playerObj.xPos, playerObj.yPos));
+
         window.display();
     }
 

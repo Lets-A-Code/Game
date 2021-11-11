@@ -14,7 +14,9 @@
 				"-Llib",
 				"-lsfml-graphics",
 				"-lsfml-window",
-				"-lsfml-system"
+				"-lsfml-system",
+				"-lsfml-audio",
+				"-lsfml-network"
 			],
 			"options": {
 				"cwd": "${workspaceFolder}"
