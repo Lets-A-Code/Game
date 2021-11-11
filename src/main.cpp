@@ -1,33 +1,97 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
-int main() {
-    sf::RenderWindow window(sf::VideoMode(1280, 720), "Game");
+int windowWidth = 1280;
+int windowHeight = 720;
 
-    bool up, down, left, right;
+using namespace sf;
+using namespace std;
+
+class playerClass {
+    public:
+        bool PlayerFaceRight;
+
+        float playerSpeed;
+
+        float xPos;
+        float yPos;
+
+        float xVel;
+        float yVel;
+
+        playerClass() {
+            PlayerFaceRight = true;
+
+            playerSpeed = 2.5;
+
+            xPos = 0;
+            yPos = 0;
+
+            xVel = 0;
+            yVel = 0;
+        }
+
+        void Update(bool playerUp, bool playerDown, bool playerLeft, bool playerRight) {
+            if(playerUp) {
+                yVel = -playerSpeed;
+            }
+
+            if(playerDown) {
+                yVel = playerSpeed;
+            }
+
+            if(playerLeft) {
+                PlayerFaceRight = false;
+                xVel = -playerSpeed;
+            }
+
+            if(playerRight) {
+                PlayerFaceRight = true;
+                xVel = playerSpeed;
+            }
+
+            if(!(playerUp || playerDown)) {
+                yVel = 0;
+            }
+
+            if(!(playerLeft || playerRight)) {
+                xVel = 0;
+            }
+
+            xPos += xVel;
+            yPos += yVel;
+        }
+};
+
+int main() {
+    RenderWindow window(VideoMode(windowWidth, windowHeight), "Game");
+
+    bool playerUp, playerDown, playerLeft, playerRight;
+
+    playerClass playerObj;
 
     while (window.isOpen()) {
-        sf::Event event;
+        Event event;
         while (window.pollEvent(event)) {
-            if (event.type == sf::Event::Closed)
+            if (event.type == Event::Closed)
                 window.close();
         }
 
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) up = true;
-        if(!(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))) up = false;
+        if(Keyboard::isKeyPressed(Keyboard::Up)) playerUp = true;
+        if(!(Keyboard::isKeyPressed(Keyboard::Up))) playerUp = false;
 
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) down = true;
-        if(!(sf::Keyboard::isKeyPressed(sf::Keyboard::Down))) down = false;
+        if(Keyboard::isKeyPressed(Keyboard::Down)) playerDown = true;
+        if(!(Keyboard::isKeyPressed(Keyboard::Down))) playerDown = false;
 
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) left = true;
-        if(!(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))) left = false;
+        if(Keyboard::isKeyPressed(Keyboard::Left)) playerLeft = true;
+        if(!(Keyboard::isKeyPressed(Keyboard::Left))) playerLeft = false;
 
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) right = true;
-        if(!(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))) right = false;
+        if(Keyboard::isKeyPressed(Keyboard::Right)) playerRight = true;
+        if(!(Keyboard::isKeyPressed(Keyboard::Right))) playerRight = false;
 
-        std::cout << "up: " << up << " down: " << down << " left: " << left << " right: " << right << std::endl;
+        playerObj.Update(playerUp, playerDown, playerLeft, playerRight);
 
-        window.clear(sf::Color(50, 50, 50));
+        window.clear(Color(50, 50, 50));
         window.setFramerateLimit(30);
         window.display();
     }
