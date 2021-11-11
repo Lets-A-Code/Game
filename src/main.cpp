@@ -68,6 +68,9 @@ int main() {
 
     bool playerUp, playerDown, playerLeft, playerRight;
 
+    Font consola;
+    consola.loadFromFile("assets/fonts/consola.ttf");
+
     Texture playerTexture;
     playerTexture.loadFromFile("assets/images/player.png");
     Sprite playerSprite(playerTexture);
@@ -97,7 +100,7 @@ int main() {
         playerObj.Update(playerUp, playerDown, playerLeft, playerRight);
 
         window.clear(Color(50, 50, 50));
-        window.setFramerateLimit(30);
+        window.setFramerateLimit(60);
 
         window.draw(playerSprite);
         playerSprite.setPosition(Vector2f(playerObj.xPos, playerObj.yPos));
