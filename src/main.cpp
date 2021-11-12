@@ -3,13 +3,30 @@
 
 int windowWidth = 1280;
 int windowHeight = 720;
+int windowHalfWidth = windowWidth / 2;
+int windowHalfHeight = windowHeight / 2;
 
 using namespace sf;
 using namespace std;
 
+class platformClass {
+    public:
+        float xPos;
+        float yPos;
+
+        float xVel;
+        float yVel;
+
+        platformClass(float xPos, float yPos) {
+            xPos = xPos;
+            yPos = yPos;
+        }
+};
+
 class playerClass {
     public:
         bool PlayerFaceRight;
+        bool onGround;
 
         float playerSpeed;
 
@@ -29,6 +46,8 @@ class playerClass {
 
             xVel = 0;
             yVel = 0;
+
+            onGround = false;
         }
 
         void Update(bool playerUp, bool playerDown, bool playerLeft, bool playerRight) {
@@ -58,8 +77,20 @@ class playerClass {
                 xVel = 0;
             }
 
+            if(onGround) {
+                yVel = 0;
+            }
+
             xPos += xVel;
             yPos += yVel;
+
+            collide();
+        }
+
+        void collide() {
+            if(yPos > 400) {
+                onGround = true;
+            }
         }
 };
 
@@ -99,7 +130,7 @@ int main() {
 
         playerObj.Update(playerUp, playerDown, playerLeft, playerRight);
 
-        window.clear(Color(50, 50, 50));
+        window.clear(Color(135, 206, 235));
         window.setFramerateLimit(60);
 
         window.draw(playerSprite);
