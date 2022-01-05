@@ -1,2 +1,2 @@
 # Game
--- A Game made with SFML --
+-- A Game made using SFML --
